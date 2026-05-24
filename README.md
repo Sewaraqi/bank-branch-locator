@@ -1,5 +1,7 @@
 # Bank Branch Locator
 
+**Live Demo:** [https://bank-branch-locator.netlify.app](https://bank-branch-locator.netlify.app)
+
 A bilingual (Hebrew/English) React web application that helps users find Israeli bank branches — either by city or by proximity to their current location.
 
 ---
