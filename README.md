@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Bank Branch Locator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A bilingual (Hebrew/English) React web application that helps users find Israeli bank branches — either by city or by proximity to their current location.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Search by City** — Enter a city name and get a full list of bank branches with addresses and phone numbers
+- **Find Nearest Branches** — Select a bank, allow location access, and instantly see the 3 closest branches sorted by distance
+- **Interactive Map** — Google Maps integration showing your location and branch markers with info windows
+- **Bilingual UI** — Full Hebrew and English support with automatic RTL layout switching
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- **Node.js** v16 or higher
+- **npm** v8 or higher
+- A **Google Maps API key** with the Maps JavaScript API enabled
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+```bash
+# 1. Clone the repository
+git clone https://github.com/sewaraqi/bank-branch-locator.git
+cd bank-branch-locator
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 2. Install dependencies
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 3. Configure environment variables
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a `.env` file in the project root:
 
-### `npm run eject`
+```env
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running Locally
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Opens the app at [http://localhost:3000](http://localhost:3000) with hot reload enabled.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Running Tests
 
-## Learn More
+```bash
+npm test
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Launches Jest in interactive watch mode.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Production Build
 
-### Code Splitting
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Outputs an optimized, minified bundle to the `/build` directory, ready for deployment.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Data Source
 
-### Making a Progressive Web App
+Branch data is fetched in real time from the **Israeli Government Open Data Portal**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **API**: `https://data.gov.il/api/3/action/datastore_search`
+- **Resource ID**: `1c5bc716-8210-4ec7-85be-92e6271955c2`
+- **Fields used**: bank name, branch name, city, address, phone, coordinates, accessibility
 
-### Advanced Configuration
+No backend is required — the app is fully client-side.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The app is deployed on **Netlify**. The `public/_redirects` file ensures all routes fall back to `index.html` for client-side navigation:
 
-### `npm run build` fails to minify
+```
+/*    /index.html   200
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To deploy manually:
+
+```bash
+npm run build
+# Upload the /build folder to Netlify, or connect your GitHub repo via the Netlify dashboard
+```
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `REACT_APP_GOOGLE_MAPS_API_KEY` | Google Maps JavaScript API key |
+
+---
+
+## Internationalization
+
+The app supports **Hebrew** (default) and **English**. Language is auto-detected from the browser and can be toggled manually via the header. Translations live in `public/locales/{lang}/translation.json`.
+
+RTL layout is applied automatically when Hebrew is active, using the MUI RTL theme and Emotion's Stylis RTL plugin.
+
+---
+
